@@ -1,9 +1,10 @@
 package ru.netology.nmedia
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.dto.Show
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -14,6 +15,8 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+
 
         fun roundOffDecimal(number: Double): Double? {
             val df = DecimalFormat("#.#")
@@ -28,6 +31,7 @@ class MainActivity : AppCompatActivity() {
             content = getString(R.string.content)
         )
 
+
         with(binding) {
             author.text = post.author
             content.text = post.content
@@ -36,8 +40,9 @@ class MainActivity : AppCompatActivity() {
                 like.setImageResource(R.drawable.likered)
             }
 
-            likeCount.text = post.likes.toString()
-            shareCount.text = post.share.toString()
+            viewCount.text = Show().showViews(post)
+
+            likeCount.text = Show().showLike(post)
 
             like.setOnClickListener {
                 post.likedByMe = !post.likedByMe
@@ -55,16 +60,31 @@ class MainActivity : AppCompatActivity() {
                 )
             }
 
+
+            shareCount.text = Show().showShare(post)
+
             shareBt.setOnClickListener {
                 post.share++
                 println(post.share)
                 if (post.share < 1000) {
                     shareCount.text = post.share.toString()
-                } else {
+                } else if (post.share >= 1000 && post.share < 10000) {
                     var decimalShare = roundOffDecimal(post.share.toDouble() / 1000)
                     shareCount.text = decimalShare.toString() + "K"
+                } else if (post.share >= 10000 && post.share < 100000) {
+                    var st = post.share.toString()
+                    var ch = st.substring(0, 2)
+                    shareCount.text = ch + "K"
+                } else if (post.share >= 100000 && post.share < 1000000) {
+                    var st = post.share.toString()
+                    var ch = st.substring(0, 3)
+                    shareCount.text = ch + "K"
+                } else if (post.share >= 1000000 && post.share < 10000000) {
+                    var decimalShare = roundOffDecimal(post.share.toDouble() / 1000000)
+                    shareCount.text = decimalShare.toString() + "M"
+                } else {
+                    shareCount.text = "10M+"
                 }
-
             }
         }
     }

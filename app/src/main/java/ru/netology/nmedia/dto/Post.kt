@@ -7,5 +7,6 @@ class Post  (
     val content: String,
     var likedByMe: Boolean = false,
     var likes: Int = 0,
-    var share: Int = 990,
+    var share: Int = 0,
+    var views: Int = 5,
 )
