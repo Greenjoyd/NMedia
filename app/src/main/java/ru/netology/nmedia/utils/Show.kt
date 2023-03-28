@@ -9,10 +9,7 @@ object Show {
         if (int < 1000) {
             return int.toString()
         } else if (int >= 1000 && int <= 10000) {
-            var floor = kotlin.math.floor(int.toDouble()) / 1000.0
-            var st = floor.toString()
-            var ch = st.substring(0,3)
-            return ch + "K"
+            return (floor((int.toDouble() / 1_000) * 10) / 10.0).toString()
         } else if (int > 10000 && int < 100000) {
             var st = int.toString()
             var ch = st.substring(0, 2)
@@ -22,12 +19,7 @@ object Show {
             var ch = st.substring(0, 3)
             return ch + "K"
         } else if (int >= 1000000 && int < 10000000) {
-            var floor = kotlin.math.floor(int.toDouble()/1000) / 1000.0
-            var st = floor.toString()
-            println(st+"st")
-            var ch = st.substring(0,3)
-            println(ch+"ch")
-            return ch + "M"
+            return (floor((int.toDouble() / 1_000_000) * 10) / 10.0).toString()
         } else {
             return "10M+"
         }
