@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     post.likes - 1
                 }
-                likeCount.text = post.likes.toString()
+                likeCount.text = Show().showLike(post)
 
                 like.setImageResource(
                     if (post.likedByMe) {
