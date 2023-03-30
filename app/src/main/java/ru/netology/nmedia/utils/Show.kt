@@ -9,7 +9,7 @@ object Show {
         if (int < 1000) {
             return int.toString()
         } else if (int >= 1000 && int <= 10000) {
-            return (floor((int.toDouble() / 1_000) * 10) / 10.0).toString()
+            return (floor((int.toDouble() / 1_000) * 10) / 10.0).toString()+"K"
         } else if (int > 10000 && int < 100000) {
             var st = int.toString()
             var ch = st.substring(0, 2)
@@ -19,7 +19,7 @@ object Show {
             var ch = st.substring(0, 3)
             return ch + "K"
         } else if (int >= 1000000 && int < 10000000) {
-            return (floor((int.toDouble() / 1_000_000) * 10) / 10.0).toString()
+            return (floor((int.toDouble() / 1_000_000) * 10) / 10.0).toString()+"M"
         } else {
             return "10M+"
         }
