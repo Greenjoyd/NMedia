@@ -8,5 +8,6 @@
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     android:padding="@dimen/common_spacing"
     android:clipToPadding="false"
+    tools:listitem="@layout/card_post"
     tools:context=".MainActivity">
 </androidx.recyclerview.widget.RecyclerView>
