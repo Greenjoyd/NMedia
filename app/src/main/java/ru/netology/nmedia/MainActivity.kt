@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
-import ru.netology.nmedia.dto.adapter.PostAdapter
+import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.utils.Show
 import ru.netology.nmedia.viewmodel.PostViewModel
 
@@ -19,12 +19,17 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel: PostViewModel by viewModels()
 
-        val adapter = PostAdapter {
-            viewModel.likeById(it.id)
-        }
+        val adapter = PostAdapter(
+            onLikeClicked = { post ->
+                viewModel.likeById(post.id)
+            },
+            onShareClicked = { post ->
+                viewModel.share(post.id)
+            }
+        )
 
         viewModel.data.observe(this) { posts ->
-            adapter.data = posts
+            adapter.submitList(posts)
         }
 
         activityMainBinding.list.adapter = adapter
