@@ -24,13 +24,12 @@ class PostViewHolder(
 
             like.setOnClickListener {
                 onLikeClicked(post)
-                likeCount.text = Show.showCount(post.likes)
             }
+            likeCount.text = Show.showCount(post.likes)
             binding.shareBt.setOnClickListener {
                 onShareClicked(post)
-                shareCount.text = Show.showCount(post.share)
             }
-
+            shareCount.text = Show.showCount(post.share)
         }
     }
 }
