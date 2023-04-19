@@ -14,7 +14,8 @@ interface Postlistener {
 }
 
 
-class PostAdapter(val listiner: Postlistener
+class PostAdapter(
+    val listiner: Postlistener
 ) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
 
 

@@ -1,7 +1,6 @@
 package ru.netology.nmedia
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -41,13 +40,18 @@ class MainActivity : AppCompatActivity() {
         }
         )
 
-        viewModel.edited.observe(this){
-            if (it.id == 0L){
+        viewModel.edited.observe(this) {
+            if (it.id == 0L) {
                 return@observe
             }
 
             activityMainBinding.content.requestFocus()
             activityMainBinding.content.setText(it.content)
+        }
+        activityMainBinding.cancel.setOnClickListener {
+            with(activityMainBinding.content) {
+                setText("")
+            }
         }
 
         activityMainBinding.save.setOnClickListener {
@@ -60,11 +64,7 @@ class MainActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
 
-                activityMainBinding.cancel.setOnClickListener {
-                    with(activityMainBinding.content){
-                        setText("")
-                    }
-                }
+
 
 
                 viewModel.changeContent(content)
