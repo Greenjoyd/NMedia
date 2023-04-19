@@ -30,7 +30,7 @@ class PostViewModel : ViewModel() {
 
 
     fun cancelEdit(){
-        edited.value = Post(0,"","","")
+        edited.value = empty
     }
 
     fun save() {
