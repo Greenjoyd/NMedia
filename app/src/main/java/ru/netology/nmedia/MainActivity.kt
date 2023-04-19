@@ -52,6 +52,8 @@ class MainActivity : AppCompatActivity() {
             with(activityMainBinding.content) {
                 setText("")
             }
+            viewModel.cancelEdit()
+
         }
 
         activityMainBinding.save.setOnClickListener {
@@ -63,9 +65,6 @@ class MainActivity : AppCompatActivity() {
                     ).show()
                     return@setOnClickListener
                 }
-
-
-
 
                 viewModel.changeContent(content)
                 viewModel.save()
@@ -82,7 +81,6 @@ class MainActivity : AppCompatActivity() {
 
 
         activityMainBinding.list.adapter = adapter
-
 
     }
 }

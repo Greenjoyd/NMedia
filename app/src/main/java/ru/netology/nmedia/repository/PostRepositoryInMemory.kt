@@ -4,6 +4,8 @@ import  androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.dto.Post
 
+
+
 class PostRepositoryInMemory : PostRepository {
 
     private var nextId = 0L
@@ -104,7 +106,6 @@ class PostRepositoryInMemory : PostRepository {
 
     override fun save(post: Post) {
         if (post.id == 0L) {
-
             posts = listOf(
                 post.copy(
                     id = ++nextId,

@@ -28,6 +28,11 @@ class PostViewModel : ViewModel() {
 
     val edited = MutableLiveData(empty)
 
+
+    fun cancelEdit(){
+        edited.value = Post(0,"","","")
+    }
+
     fun save() {
         edited.value?.let {
             repository.save(it)
@@ -38,6 +43,7 @@ class PostViewModel : ViewModel() {
     fun edit(post: Post) {
         edited.value = post
     }
+
 
     fun changeContent(content: String) {
         edited.value?.let { post ->
