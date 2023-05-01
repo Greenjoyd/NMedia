@@ -21,21 +21,18 @@ class PostViewHolder(
 
 
 
-            like.setImageResource(
-                if (post.likedByMe) R.drawable.likered else R.drawable.ic_round_favorite_border_24
-            )
-            viewCount.text = Show.showCount(post.views)
-
+            like.isChecked = post.likedByMe
+            like.text = post.likes.toString()
+            viewsBt.text = post.views.toString()
+            shareBt.text = post.share.toString()
 
 
             like.setOnClickListener {
                 listiner.onLike(post)
             }
-            likeCount.text = Show.showCount(post.likes)
             binding.shareBt.setOnClickListener {
                 listiner.share(post)
             }
-            shareCount.text = Show.showCount(post.share)
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {

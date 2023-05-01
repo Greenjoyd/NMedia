@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding="@dimen/common_spacing"
     android:layout_height="wrap_content"
+    android:padding="@dimen/common_spacing"
     tools:context=".MainActivity">
 
     <TextView
@@ -26,8 +26,8 @@
         android:id="@+id/published"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/published"
         android:layout_marginStart="@dimen/common_spacing"
+        android:text="@string/published"
         app:layout_constraintBottom_toBottomOf="@+id/avatar"
         app:layout_constraintStart_toEndOf="@+id/avatar"
         app:layout_constraintTop_toBottomOf="@id/author" />
@@ -51,17 +51,15 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="64dp" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/menu"
+        style="@style/MenuStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/common_spacing"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/author"
+        android:layout_marginEnd="4dp"
+        app:icon="@drawable/ic_baseline_more_vert_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ic_baseline_more_vert_24" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/content"
@@ -70,9 +68,9 @@
         android:layout_marginStart="@dimen/common_spacing"
         android:layout_marginTop="@dimen/common_spacing"
         android:layout_marginEnd="@dimen/common_spacing"
-        android:text="@string/content"
         android:autoLink="web"
         android:linksClickable="true"
+        android:text="@string/content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,67 +85,47 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="64dp" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/like"
+        style="@style/LikeStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="@dimen/common_spacing"
         android:background="#FFFFFF"
+        android:checkable="true"
+        app:icon="@drawable/ic_like"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/content"
-        app:srcCompat="@drawable/ic_round_favorite_border_24" />
+        tools:checked="true"
+        tools:text="0" />
 
-    <TextView
-        android:id="@+id/likeCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/likeCount"
-        app:layout_constraintStart_toEndOf="@+id/like"
-        app:layout_constraintTop_toBottomOf="@+id/content" />
-
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/shareBt"
+        style="@style/ShareStyle"
+        android:textColor="@android:color/tab_indicator_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="#FFFFFF"
-        app:layout_constraintStart_toEndOf="@+id/likeCount"
+        app:icon="@drawable/ic_baseline_share_24"
+        app:layout_constraintStart_toEndOf="@+id/like"
         app:layout_constraintTop_toBottomOf="@+id/content"
-        app:srcCompat="@drawable/ic_baseline_share_24" />
+        tools:text="0" />
 
-    <TextView
-        android:id="@+id/shareCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/shareCount"
-        app:layout_constraintStart_toEndOf="@+id/shareBt"
-        app:layout_constraintTop_toBottomOf="@+id/content" />
-
-    <TextView
-        android:id="@+id/viewCount"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/viewsBt"
+        style="@style/ShareStyle"
+        tools:text="0"
+        android:textColor="@android:color/tab_indicator_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/viewCount"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/shareBt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content" />
-
-    <ImageButton
-        android:id="@+id/imageButton8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="#FFFFFF"
-        app:layout_constraintEnd_toStartOf="@+id/viewCount"
         app:layout_constraintTop_toBottomOf="@+id/content"
-        app:srcCompat="@drawable/ic_baseline_remove_red_eye_24" />
+        app:icon="@drawable/ic_baseline_remove_red_eye_24" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
