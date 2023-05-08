@@ -11,6 +11,7 @@ interface Postlistener {
     fun onEdit(post: Post) {}
     fun onRemove(post: Post) {}
     fun share(post: Post) {}
+    fun onVideo(post: Post) {}
 }
 
 

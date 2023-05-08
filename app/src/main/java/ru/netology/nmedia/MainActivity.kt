@@ -1,14 +1,17 @@
 package ru.netology.nmedia
 
+import android.content.Intent
+import android.content.Intent.EXTRA_TEXT
+import android.content.Intent.createChooser
+import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
+import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.adapter.Postlistener
 import ru.netology.nmedia.dto.Post
-import ru.netology.nmedia.utils.AndroidUtils
 import ru.netology.nmedia.viewmodel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +22,17 @@ class MainActivity : AppCompatActivity() {
 
 
         val viewModel: PostViewModel by viewModels()
+        val newPostContract = registerForActivityResult(NewPostActivity.NewPostContract){ result ->
+            result ?: return@registerForActivityResult
+            viewModel.changeContent(result)
+            viewModel.save()
+        }
+        val editPostContract = registerForActivityResult(NewPostActivity.EditPostContract){ result ->
+            result ?: return@registerForActivityResult
+            viewModel.changeContent(result)
+            viewModel.save()
+        }
+
 
         val adapter = PostAdapter(object : Postlistener {
 
@@ -28,51 +42,32 @@ class MainActivity : AppCompatActivity() {
 
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
+                editPostContract.launch(post.content)
             }
 
             override fun onLike(post: Post) {
                 viewModel.likeById(post.id)
             }
+            override fun onVideo(post: Post) {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
+                startActivity(intent)
+            }
+
 
             override fun share(post: Post) {
                 viewModel.share(post.id)
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, post.content)
+                    type = "text/plain"
+                }
+                val startIntent = createChooser(intent, getString(R.string.chooser_share_post))
+                startActivity(startIntent)
             }
         }
         )
-
-        viewModel.edited.observe(this) {
-            if (it.id == 0L) {
-                return@observe
-            }
-
-            activityMainBinding.content.requestFocus()
-            activityMainBinding.content.setText(it.content)
-        }
-        activityMainBinding.cancel.setOnClickListener {
-            with(activityMainBinding.content) {
-                setText("")
-            }
-            viewModel.cancelEdit()
-
-        }
-
-        activityMainBinding.save.setOnClickListener {
-            with(activityMainBinding.content) {
-                val content = text.toString()
-                if (content.isBlank()) {
-                    Toast.makeText(
-                        this@MainActivity, R.string.empty_post_error, Toast.LENGTH_SHORT
-                    ).show()
-                    return@setOnClickListener
-                }
-
-                viewModel.changeContent(content)
-                viewModel.save()
-
-                setText("")
-                clearFocus()
-                AndroidUtils.hideKeyboard(this)
-            }
+        activityMainBinding.add.setOnClickListener{
+            newPostContract.launch()
         }
 
         viewModel.data.observe(this) { posts ->
