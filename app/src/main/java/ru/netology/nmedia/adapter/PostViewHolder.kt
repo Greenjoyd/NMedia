@@ -20,7 +20,9 @@ class PostViewHolder(
             published.text = post.published
             content.text = post.content
 
-            if (post.video.isNullOrBlank()){videoBt.visibility = View.GONE;playBt.visibility = View.GONE}
+            if (post.video.isNullOrBlank()){
+                videoBt.visibility = View.GONE;playBt.visibility = View.GONE
+            } else{videoBt.visibility = View.VISIBLE; playBt.visibility = View.VISIBLE}
 
             videoBt.setOnClickListener{
                 listiner.onVideo(post)
