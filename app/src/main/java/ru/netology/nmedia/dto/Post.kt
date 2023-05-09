@@ -11,5 +11,5 @@ data class Post(
     val likes: Int = 0,
     var share: Int = 0,
     val views: Int = 0,
-    var video: Boolean = false
+    var video: String  = ""
 )

@@ -15,23 +15,27 @@ import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.viewmodel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    val viewModel: PostViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
 
 
-        val viewModel: PostViewModel by viewModels()
-        val newPostContract = registerForActivityResult(NewPostActivity.NewPostContract){ result ->
+
+        val newPostContract = registerForActivityResult(NewPostActivity.NewPostContract) { result ->
             result ?: return@registerForActivityResult
             viewModel.changeContent(result)
             viewModel.save()
         }
-        val editPostContract = registerForActivityResult(NewPostActivity.EditPostContract){ result ->
-            result ?: return@registerForActivityResult
-            viewModel.changeContent(result)
-            viewModel.save()
-        }
+        val editPostContract =
+            registerForActivityResult(NewPostActivity.EditPostContract) { result ->
+                result ?: return@registerForActivityResult
+                viewModel.changeContent(result)
+                viewModel.save()
+            }
 
 
         val adapter = PostAdapter(object : Postlistener {
@@ -43,13 +47,18 @@ class MainActivity : AppCompatActivity() {
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
                 editPostContract.launch(post.content)
+
             }
 
             override fun onLike(post: Post) {
                 viewModel.likeById(post.id)
             }
+
             override fun onVideo(post: Post) {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
+                val intent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(post.video)
+                )
                 startActivity(intent)
             }
 
@@ -66,8 +75,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
         )
-        activityMainBinding.add.setOnClickListener{
+        activityMainBinding.add.setOnClickListener {
             newPostContract.launch()
+            viewModel.cancelEdit()
         }
 
         viewModel.data.observe(this) { posts ->
@@ -78,6 +88,12 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding.list.adapter = adapter
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.cancelEdit()
+    }
+
 }
 
 

@@ -9,6 +9,7 @@ import android.text.Editable
 import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContract
 import ru.netology.nmedia.databinding.ActivityNewPostBinding
+import ru.netology.nmedia.viewmodel.PostViewModel
 
 class NewPostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +32,8 @@ class NewPostActivity : AppCompatActivity() {
         }
 
     }
+
+
 
     object NewPostContract : ActivityResultContract<Unit, String?>(){
         override fun createIntent(context: Context, input: Unit) = Intent(context, NewPostActivity::class.java)

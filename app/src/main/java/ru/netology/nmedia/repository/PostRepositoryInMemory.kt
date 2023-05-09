@@ -53,7 +53,7 @@ class PostRepositoryInMemory : PostRepository {
                     "    остается с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться\n" +
                     "    выше, бежать быстрее. Наша миссия - помочь встать на путь роста и начать цепочку пермен → http://netolo.gy/fyb",
             share = 0,
-            video = true
+            video = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 
         ), Post(
             id = ++nextId,
