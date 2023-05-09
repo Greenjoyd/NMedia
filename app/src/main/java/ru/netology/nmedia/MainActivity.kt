@@ -77,7 +77,6 @@ class MainActivity : AppCompatActivity() {
         )
         activityMainBinding.add.setOnClickListener {
             newPostContract.launch()
-            viewModel.cancelEdit()
         }
 
         viewModel.data.observe(this) { posts ->
