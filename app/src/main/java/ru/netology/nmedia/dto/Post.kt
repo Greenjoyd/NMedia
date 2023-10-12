@@ -1,7 +1,5 @@
 package ru.netology.nmedia.dto
 
-import android.provider.MediaStore.Video
-
 data class Post(
     val id: Long,
     val author: String,

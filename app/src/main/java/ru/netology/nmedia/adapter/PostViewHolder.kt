@@ -6,12 +6,11 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
-import ru.netology.nmedia.utils.Show
 
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val listiner: Postlistener,
+    private val listener: Postlistener,
 ) : ViewHolder(binding.root) {
 
     fun bind(post: Post) {
@@ -20,15 +19,15 @@ class PostViewHolder(
             published.text = post.published
             content.text = post.content
 
-            if (post.video.isNullOrBlank()){
+            if (post.video.isBlank()){
                 videoBt.visibility = View.GONE;playBt.visibility = View.GONE
             } else{videoBt.visibility = View.VISIBLE; playBt.visibility = View.VISIBLE}
 
             videoBt.setOnClickListener{
-                listiner.onVideo(post)
+                listener.onVideo(post)
             }
             playBt.setOnClickListener{
-                listiner.onVideo(post)
+                listener.onVideo(post)
             }
 
             like.isChecked = post.likedByMe
@@ -39,10 +38,10 @@ class PostViewHolder(
 
 
             like.setOnClickListener {
-                listiner.onLike(post)
+                listener.onLike(post)
             }
             binding.shareBt.setOnClickListener {
-                listiner.share(post)
+                listener.share(post)
             }
 
             menu.setOnClickListener {
@@ -51,11 +50,11 @@ class PostViewHolder(
                     setOnMenuItemClickListener { item ->
                         when (item.itemId) {
                             R.id.remove -> {
-                                listiner.onRemove(post)
+                                listener.onRemove(post)
                                 true
                             }
                             R.id.edit -> {
-                                listiner.onEdit(post)
+                                listener.onEdit(post)
                                 true
                             }
                             else -> false

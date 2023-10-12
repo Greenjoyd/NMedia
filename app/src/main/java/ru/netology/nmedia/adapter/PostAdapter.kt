@@ -16,7 +16,7 @@ interface Postlistener {
 
 
 class PostAdapter(
-    val listiner: Postlistener
+    val listener: Postlistener
 ) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
 
 
@@ -29,7 +29,7 @@ class PostAdapter(
             )
         return PostViewHolder(
             binding = binding,
-            listiner = listiner,
+            listener = listener,
         )
     }
 

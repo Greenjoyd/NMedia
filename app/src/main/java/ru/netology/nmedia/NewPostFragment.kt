@@ -36,7 +36,7 @@ class NewPostFragment : Fragment() {
 
         binding.ok.setOnClickListener {
             val text = binding.content.text.toString()
-            if (!text.isNullOrBlank()) {
+            if (text.isNotBlank()) {
                 if (editedPost != null) {
                     // Редактирование поста, обновляем контент
                     viewModel.changeContent(text)
