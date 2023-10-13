@@ -10,4 +10,6 @@ data class Post(
     var share: Int = 0,
     val views: Int = 0,
     var video: String  = ""
-)
+) {
+
+}
